@@ -1,16 +1,20 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  deploy_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: llxlr/hello-world-docker-action@master
+    - name: Deployment
+      uses: llxlr/fuck-deploy@master
       with:
-        who-to-greet: 'Mona the Octocat'
-        a: 'this is a'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+        type: 'password'
+        username: 'root'
+        host: '127.0.0.1'
+        port: 22
+        password: '123456'
+        #private_key: 
+        remote_path: '/www/wwwroot/default/'
+        local_path: './'
+        include: 'a.txt'
+        exclude: '.env'
+        args: '-o FakeOption'
