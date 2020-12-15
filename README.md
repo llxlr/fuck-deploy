@@ -1,21 +1,13 @@
-# Hello world docker action
-
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
-
-## Inputs
-
-### `who-to-greet`
-
-**Required** The name of the person to greet. Default `"World"`.
-
-## Outputs
-
-### `time`
-
-The time we greeted you.
-
-## Example usage
-
-uses: actions/hello-world-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+## Fuck Deploy
+use rsync with ssh and sshpass to deploy project in server
+### Usage
+  1. `type`: password or private_key
+  2. `username`: Server username
+  3. `host`: IP
+  4. `port`: default `22`
+  5. `password`: password
+  6. `private_key`: Private Key
+  7. `remote_path`: server path
+  8. `local_path`: github actions' server path
+  9. `args`: rsync args
+  10. `scripts`: will support
