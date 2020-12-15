@@ -29,5 +29,6 @@ then
   sh -c "rsync $INPUT_ARGS -e 'ssh -i $path/id_rsa -p $INPUT_PORT' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
 elif [[ $INPUT_TYPE == "password" ]]
 then
-  sh -c "sshpass -p $INPUT_PASSWORD rsync $INPUT_ARGS -e 'ssh -p $INPUT_PORT' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  sh -c "rsync $INPUT_ARGS -e 'sshpass -p $INPUT_PASSWORD ssh -p $INPUT_PORT -o StrictHostKeyChecking=no -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  #rsync -ratlz --rsh="sshpass -p password ssh -o StrictHostKeyChecking=no -l username" src_path dest_path
 fi
