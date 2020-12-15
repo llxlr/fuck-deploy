@@ -1,17 +1,40 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Fuck Deploy'
+description: 'Using Github Actions deploy it to server with password or private_key'
+author: 'jamesyang <i@xhlr.top>'
+branding:
+  icon: 'upload-cloud'
+  color: 'green'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-  a:
+  type:
     description: ''
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+    required: true
+  username:
+    description: 'Server username'
+    required: true
+  host:
+    description: 'IP'
+    required: true
+  port:
+    description: ''
+    default: 22
+  password:
+    description: 'password'
+  private_key:
+    description: 'Private Key'
+  remote_path:
+    description: ''
+    required: true
+  local_path:
+    description: ''
+    default: './'
+  include:
+    description: ''
+    #required: true
+  exclude:
+    description: ''
+    #default: '.env'
+  args:
+    description: 'rsync args'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
