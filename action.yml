@@ -26,15 +26,16 @@ inputs:
     required: true
   local_path:
     description: ''
-    default: './'
+    default: './*'
   include:
     description: ''
     #required: true
   exclude:
     description: ''
-    #default: '.env'
+    default: '.env'
   args:
     description: 'rsync args'
+    default: '-o ConnectTimeout=5 -o StrictHostKeyChecking=no'
 runs:
   using: 'docker'
   image: 'Dockerfile'
