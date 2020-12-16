@@ -24,9 +24,9 @@ then
   mkdir -p "$path"
   echo "$INPUT_PRIVATE_KEY" > "$path/id_rsa"
   chmod 600 "$path/id_rsa"
-  sh -c "rsync -ratlz --rsh='ssh -i $path/id_rsa -p $INPUT_PORT $INPUT_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  sh -c "rsync $INPUT_ARGS --rsh='ssh -i $path/id_rsa -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
 elif [[ $INPUT_TYPE == "password" ]]
 then
   export SSHPASS=$INPUT_PASSWORD
-  sh -c "rsync -ratlz --rsh='sshpass -e ssh -p $INPUT_PORT $INPUT_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  sh -c "rsync $INPUT_ARGS --rsh='sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
 fi
