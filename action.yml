@@ -37,7 +37,7 @@ inputs:
     default: '-ratlz'
   ssh_args:
     description: 'ssh args'
-    default: '-o ConnectTimeout=5 -o StrictHostKeyChecking=no'
+    default: '-o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 runs:
   using: 'docker'
   image: 'Dockerfile'
