@@ -10,4 +10,5 @@ use rsync with ssh and sshpass to deploy project in server
   7. `remote_path`: server path
   8. `local_path`: github actions' server path
   9. `args`: rsync args
-  10. `scripts`: will support
+  10. `ssh_args`: ssh args
+  11. `scripts`: will support
