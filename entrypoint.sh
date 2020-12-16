@@ -1,7 +1,8 @@
 #!/bin/sh -l
 set -eu
 
-if [ -z "$INPUT_TYPE" ]; then
+if [ -z "$INPUT_TYPE" ]
+then
   echo 'Required Args parameter'
   exit 1
 fi
