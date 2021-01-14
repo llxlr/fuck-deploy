@@ -8,12 +8,12 @@ then
 fi
 
 deploy_args="$INPUT_USERNAME@$INPUT_HOST:$INPUT_REMOTE_PATH" 
-include=(${INPUT_INCLUDE//,/})
+include=${INPUT_INCLUDE//,/}
 for var in ${include[@]}
 do
   echo $var >> include.txt
 done
-exclude=(${INPUT_EXCLUDE//,/})
+exclude=${INPUT_EXCLUDE//,/}
 for var in ${exclude[@]}
 do
   echo $var >> exclude.txt
