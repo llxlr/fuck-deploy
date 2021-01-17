@@ -31,7 +31,6 @@ inputs:
     description: ''
   exclude:
     description: ''
-    default: '.env'
   args:
     description: 'rsync args'
     default: '-ratlz'
