@@ -1,5 +1,5 @@
 name: 'Fuck Deploy'
-description: 'Using Github Actions deploy it to server with password or private_key'
+description: 'Use rsync with SSH and SSHPASS to deploy project in server'
 author: 'jamesyang <i@xhlr.top>'
 branding:
   icon: 'upload-cloud'
@@ -11,16 +11,16 @@ inputs:
   username:
     description: 'Server username'
     required: true
+  password:
+    description: 'password'
+  key:
+    description: 'Private Key'
   host:
     description: 'IP'
     required: true
   port:
     description: ''
     default: 22
-  password:
-    description: 'password'
-  private_key:
-    description: 'Private Key'
   remote_path:
     description: ''
     required: true
@@ -37,6 +37,8 @@ inputs:
   ssh_args:
     description: 'ssh args'
     default: '-o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+  scripts:
+    description: 'deployment scripts'
 runs:
   using: 'docker'
   image: 'Dockerfile'

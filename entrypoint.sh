@@ -1,33 +1,52 @@
 #!/bin/sh -l
 set -eu
 
-if [ -z "$INPUT_TYPE" ]
+if [[ -z "$INPUT_TYPE" ]]
 then
-  echo 'Required Args parameter'
+  echo "Required Args parameter !"
   exit 1
 fi
 
-deploy_args="$INPUT_USERNAME@$INPUT_HOST:$INPUT_REMOTE_PATH" 
-include=${INPUT_INCLUDE//,/}
-for var in ${include[@]}
+LOCAL_PATH="$GITHUB_WORKSPACE/$INPUT_LOCAL_PATH"
+REMOTE_PATH="$INPUT_REMOTE_PATH" 
+
+INCLUDE=""
+for i in ${INPUT_INCLUDE[@]}
 do
-  echo $var >> include.txt
-done
-exclude=${INPUT_EXCLUDE//,/}
-for var in ${exclude[@]}
-do
-  echo $var >> exclude.txt
+  INCLUDE="${INCLUDE}--include ${i} "
 done
 
-if [[ $INPUT_TYPE == "private_key" ]]
+EXCLUDE=""
+for i in ${INPUT_EXCLUDE[@]}
+do
+  EXCLUDE="${EXCLUDE}--include ${i} "
+done
+
+if [[ $INPUT_TYPE == "key" ]]
 then
-  path="$HOME/.ssh"
-  mkdir -p "$path"
-  echo "$INPUT_PRIVATE_KEY" > "$path/id_rsa"
-  chmod 600 "$path/id_rsa"
-  sh -c "rsync $INPUT_ARGS --rsh='ssh -i $path/id_rsa -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  SSHPATH="$HOME/.ssh"
+  mkdir -p $SSHPATH
+  chmod 
+  echo "$INPUT_KEY" > "$SSHPATH/id_rsa.pem"
+  chmod 600 "$SSHPATH/id_rsa.pem"
+  sh -c "rsync $INPUT_ARGS -e 'ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
+
+  if [[ -z $INPUT_SCRIPTS ]]
+  then
+    # sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
+    echo $INPUT_SCRIPTS
+  if
 elif [[ $INPUT_TYPE == "password" ]]
 then
   export SSHPASS=$INPUT_PASSWORD
-  sh -c "rsync $INPUT_ARGS --rsh='sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $GITHUB_WORKSPACE/$INPUT_LOCAL_PATH $deploy_args"
+  sh -c "rsync $INPUT_ARGS -e 'sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
+
+  if [[ -z $INPUT_SCRIPTS ]]
+  then
+    # sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
+    echo $INPUT_SCRIPTS
+  if
+else
+  echo "Parameter error !"
+  exit 1
 fi

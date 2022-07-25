@@ -1,4 +1,5 @@
 FROM alpine:latest
+
 LABEL "maintainer"="jamesyang <i@xhlr.top>"
 
 COPY entrypoint.sh /entrypoint.sh

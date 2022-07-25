@@ -1,20 +1,43 @@
 on: [push]
 
 jobs:
-  deploy_job:
+  job1:
     runs-on: ubuntu-latest
     steps:
-    - name: Deployment
-      uses: llxlr/fuck-deploy@master
+    - uses: llxlr/fuck-deploy@master
       with:
         type: 'password'
         username: 'root'
+        password: '123456'
         host: '127.0.0.1'
         port: 22
-        password: '123456'
-        #private_key: 
         remote_path: '/www/wwwroot/default/'
         local_path: './'
-        include: 'a.txt'
-        exclude: '.env'
+        include:
+          - 'a.txt'
+        exclude:
+          - '.env'
         args: '-o FakeOption'
+        scripts:
+          path: 'deploy.sh'
+          args: 'prod'
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: llxlr/fuck-deploy@master
+      with:
+        type: 'key'
+        username: 'root'
+        key: '${{ secrets.KEY }}'
+        host: '127.0.0.1'
+        port: 22
+        remote_path: '/www/wwwroot/default/'
+        local_path: './'
+        include:
+          - 'a.txt'
+        exclude:
+          - '.env'
+        args: '-o FakeOption'
+        scripts:
+          path: 'deploy.sh'
+          args: 'dev'
