@@ -22,6 +22,8 @@ do
   EXCLUDE="${EXCLUDE}--include ${i} "
 done
 
+echo $INPUT_SCRIPTS
+
 if [[ $INPUT_TYPE == "key" ]]
 then
   SSHPATH="$HOME/.ssh"
@@ -33,8 +35,7 @@ then
 
   if [[ -z $INPUT_SCRIPTS ]]
   then
-    # sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
-    echo $INPUT_SCRIPTS
+    sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
   if
 elif [[ $INPUT_TYPE == "password" ]]
 then
@@ -43,8 +44,7 @@ then
 
   if [[ -z $INPUT_SCRIPTS ]]
   then
-    # sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
-    echo $INPUT_SCRIPTS
+    sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
   if
 else
   echo "Parameter error !"
