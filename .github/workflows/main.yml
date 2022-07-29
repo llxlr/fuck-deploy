@@ -15,14 +15,17 @@ jobs:
         port: 22
         remote_path: '/www/wwwroot/default/'
         local_path: './'
-        include:
-          - 'a.txt'
-        exclude:
-          - '.env'
+        include: |
+          'a.txt'
+          'b.txt'
+        exclude: |
+          '.env'
+          '.env.prod'
         args: '-o FakeOption'
         scripts:
           path: 'deploy.sh'
           args: 'prod'
+
   job2:
     runs-on: ubuntu-latest
     steps:
@@ -35,10 +38,12 @@ jobs:
         port: 22
         remote_path: '/www/wwwroot/default/'
         local_path: './'
-        include:
-          - 'a.txt'
-        exclude:
-          - '.env'
+        include: |
+          'a.txt'
+          'b.txt'
+        exclude: |
+          '.env'
+          '.env.prod'
         args: '-o FakeOption'
         scripts:
           path: 'deploy.sh'

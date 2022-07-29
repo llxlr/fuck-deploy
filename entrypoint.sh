@@ -7,6 +7,10 @@ then
   exit 1
 fi
 
+echo $INPUT_SCRIPTS
+echo $INPUT_INCLUDE
+echo $INPUT_EXCLUDE
+
 LOCAL_PATH="$GITHUB_WORKSPACE/$INPUT_LOCAL_PATH"
 REMOTE_PATH="$INPUT_REMOTE_PATH" 
 
@@ -21,8 +25,6 @@ for i in ${INPUT_EXCLUDE[@]}
 do
   EXCLUDE="${EXCLUDE}--include ${i} "
 done
-
-echo $INPUT_SCRIPTS
 
 if [[ $INPUT_TYPE == "key" ]]
 then

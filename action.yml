@@ -1,3 +1,4 @@
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
 name: 'Fuck Deploy'
 description: 'Use rsync with SSH and SSHPASS to deploy project in server'
 author: 'jamesyang <i@xhlr.top>'
@@ -6,36 +7,36 @@ branding:
   color: 'green'
 inputs:
   type:
-    description: ''
+    description: 'Authentication Method'
     required: true
   username:
-    description: 'Server username'
+    description: 'Remote Server Username'
     required: true
   password:
-    description: 'password'
+    description: 'Remote Server Password'
   key:
     description: 'Private Key'
   host:
-    description: 'IP'
+    description: 'Remote Server IP or Domain Name'
     required: true
   port:
-    description: ''
+    description: 'Remote Server Port'
     default: 22
   remote_path:
-    description: ''
+    description: 'Remote Server Path'
     required: true
   local_path:
-    description: ''
+    description: 'Github Runner Local Path'
     default: './*'
   include:
-    description: ''
+    description: 'Include Files or Directory'
   exclude:
-    description: ''
+    description: 'Exclude Files or Directory'
   args:
-    description: 'rsync args'
+    description: 'Rsync Arguments'
     default: '-ratlz'
   ssh_args:
-    description: 'ssh args'
+    description: 'SSH Arguments'
     default: '-o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
   scripts:
     description: 'deployment scripts'
