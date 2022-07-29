@@ -38,8 +38,8 @@ inputs:
   ssh_args:
     description: 'SSH Arguments'
     default: '-o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
-  scripts:
-    description: 'deployment scripts'
+  script:
+    description: 'deployment script'
 runs:
   using: 'docker'
   image: 'Dockerfile'

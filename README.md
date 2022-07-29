@@ -2,6 +2,7 @@
 Use rsync with SSH and SSHPASS to deploy project in server
 
 ## Usage
+
   1. `type`: login verification method
    - `port`: default `22`
    - `password`: Password
@@ -12,9 +13,9 @@ Use rsync with SSH and SSHPASS to deploy project in server
   6. `local_path`: Github Actions' server relative path
   7. `args`: rsync args
   8. `ssh_args`: ssh args
-  9. `scripts`: 
-   - `path`: scripts path
-   - `args`: scripts args
+  9. `script`: support script
+
+Environment: `prod` or `dev`
 
 ## References:
 

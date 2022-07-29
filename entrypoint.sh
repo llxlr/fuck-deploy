@@ -7,6 +7,7 @@ then
   exit 1
 fi
 
+echo $ENVIRONMENT
 echo $INPUT_SCRIPTS
 echo $INPUT_INCLUDE
 echo $INPUT_EXCLUDE
@@ -37,7 +38,7 @@ then
 
   if [[ -z $INPUT_SCRIPTS ]]
   then
-    sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
+    sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
   if
 elif [[ $INPUT_TYPE == "password" ]]
 then
@@ -46,7 +47,7 @@ then
 
   if [[ -z $INPUT_SCRIPTS ]]
   then
-    sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $INPUT_SCRIPTS"
+    sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
   if
 else
   echo "Parameter error !"
