@@ -27,29 +27,32 @@ do
   EXCLUDE="${EXCLUDE}--include ${i} "
 done
 
-if [[ $INPUT_TYPE == "key" ]]
-then
-  SSHPATH="$HOME/.ssh"
-  mkdir -p $SSHPATH
-  chmod 
-  echo "$INPUT_KEY" > "$SSHPATH/id_rsa.pem"
-  chmod 600 "$SSHPATH/id_rsa.pem"
-  sh -c "rsync $INPUT_ARGS -e 'ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
+echo $INCLUDE
+echo $EXCLUDE
 
-  if [[ -z $INPUT_SCRIPTS ]]
-  then
-    sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
-  if
-elif [[ $INPUT_TYPE == "password" ]]
-then
-  export SSHPASS=$INPUT_PASSWORD
-  sh -c "rsync $INPUT_ARGS -e 'sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
+# if [[ $INPUT_TYPE == "key" ]]
+# then
+#   SSHPATH="$HOME/.ssh"
+#   mkdir -p $SSHPATH
+#   chmod 
+#   echo "$INPUT_KEY" > "$SSHPATH/id_rsa.pem"
+#   chmod 600 "$SSHPATH/id_rsa.pem"
+#   sh -c "rsync $INPUT_ARGS -e 'ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
 
-  if [[ -z $INPUT_SCRIPTS ]]
-  then
-    sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
-  if
-else
-  echo "Parameter error !"
-  exit 1
-fi
+#   if [[ -z $INPUT_SCRIPTS ]]
+#   then
+#     sh -c "ssh -i $path/id_rsa.pem -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
+#   if
+# elif [[ $INPUT_TYPE == "password" ]]
+# then
+#   export SSHPASS=$INPUT_PASSWORD
+#   sh -c "rsync $INPUT_ARGS -e 'sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME' $INCLUDE $EXCLUDE $LOCAL_PATH $INPUT_USERNAME@$INPUT_HOST:$REMOTE_PATH"
+
+#   if [[ -z $INPUT_SCRIPTS ]]
+#   then
+#     sh -c "sshpass -e ssh -p $INPUT_PORT $INPUT_SSH_ARGS -l $INPUT_USERNAME bash -s < $ENVIRONMENT"
+#   if
+# else
+#   echo "Parameter error !"
+#   exit 1
+# fi
