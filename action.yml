@@ -17,7 +17,7 @@ inputs:
   key:
     description: 'Private Key'
   host:
-    description: 'Remote Server IP or Domain Name'
+    description: 'Remote Server IP Address or Domain Name'
     required: true
   port:
     description: 'Remote Server Port'
@@ -26,7 +26,7 @@ inputs:
     description: 'Remote Server Path'
     required: true
   local_path:
-    description: 'Github Runner Local Path'
+    description: 'Github Runner Local Relative Path'
     default: './*'
   include:
     description: 'Include Files or Directory'
@@ -39,7 +39,7 @@ inputs:
     description: 'SSH Arguments'
     default: '-o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
   script:
-    description: 'deployment script'
+    description: 'Deployment Script'
 runs:
   using: 'docker'
   image: 'Dockerfile'
